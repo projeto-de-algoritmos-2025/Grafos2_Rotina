@@ -31,19 +31,6 @@ def listar_rotas():
     for origem, destino, dados in G.edges(data=True):
         print(f" - {origem} ↔ {destino} ({dados['peso']} km)")
 
-def menor_caminho():
-    origem = input("Digite o local de origem: ").strip().capitalize()
-    destino = input("Digite o local de destino: ").strip().capitalize()
-    try:
-        caminho = nx.dijkstra_path(G, origem, destino, weight='peso')
-        distancia = nx.dijkstra_path_length(G, origem, destino, weight='peso')
-        print(f"Caminho mais curto: {' → '.join(caminho)} (Total: {distancia:.2f} km)")
-        plotar_grafo(caminho)
-    except nx.NetworkXNoPath:
-        print("Não há caminho entre os locais.")
-    except nx.NodeNotFound as e:
-        print(f"Erro: {e}")
-
 def plotar_grafo(highlight_path=None):
     pos = nx.spring_layout(G)
     plt.figure(figsize=(10, 6))
@@ -60,6 +47,19 @@ def plotar_grafo(highlight_path=None):
     plt.title("Mapa de Rotas")
     plt.axis('off')
     plt.show()
+
+def menor_caminho():
+    origem = input("Digite o local de origem: ").strip().capitalize()
+    destino = input("Digite o local de destino: ").strip().capitalize()
+    try:
+        caminho = nx.dijkstra_path(G, origem, destino, weight='peso')
+        distancia = nx.dijkstra_path_length(G, origem, destino, weight='peso')
+        print(f"Caminho mais curto: {' → '.join(caminho)} (Total: {distancia:.2f} km)")
+        plotar_grafo(caminho)
+    except nx.NetworkXNoPath:
+        print("Não há caminho entre os locais.")
+    except nx.NodeNotFound as e:
+        print(f"Erro: {e}")
 
 def menu():
     while True:
