@@ -3,9 +3,8 @@ import matplotlib.pyplot as plt
 
 G = nx.Graph()
 
-# Depois colocar um capitalize
 def criar_local():
-    nome = input("Digite o nome do local: ").strip()
+    nome = input("Digite o nome do local: ").strip().capitalize()
     if nome in G:
         print(f"Local '{nome}' já existe.")
     else:
@@ -13,8 +12,8 @@ def criar_local():
         print(f"Local '{nome}' criado com sucesso.")
 
 def criar_rota():
-    origem = input("Digite o local de origem: ").strip()
-    destino = input("Digite o local de destino: ").strip()
+    origem = input("Digite o local de origem: ").strip().capitalize()
+    destino = input("Digite o local de destino: ").strip().capitalize()
     try:
         peso = float(input("Digite a distância entre os locais (em km): "))
         G.add_edge(origem, destino, peso=peso)
@@ -33,8 +32,8 @@ def listar_rotas():
         print(f" - {origem} ↔ {destino} ({dados['peso']} km)")
 
 def menor_caminho():
-    origem = input("Digite o local de origem: ").strip()
-    destino = input("Digite o local de destino: ").strip()
+    origem = input("Digite o local de origem: ").strip().capitalize()
+    destino = input("Digite o local de destino: ").strip().capitalize()
     try:
         caminho = nx.dijkstra_path(G, origem, destino, weight='peso')
         distancia = nx.dijkstra_path_length(G, origem, destino, weight='peso')
